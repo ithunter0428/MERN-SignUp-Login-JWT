@@ -1,16 +1,6 @@
 import express from "express"
 import Register from "../model/signup"
 import responseMessage from "../constant/responseMessage"
-const Redis = require("redis");
-
-// const redisClient = Redis.createClient();
-// redisClient.on('connect',  () => {
-//     console.log('Redis Connected!')
-// })
-// redisClient.on('error',  (err: any) => {
-//     console.log('Redis Error!', err);
-// })
-// redisClient.connect()
 
 const getUserData = async (req:any,res:any) =>{
     // console.log('Redis client testing -> ', redisClient)
@@ -19,9 +9,6 @@ const getUserData = async (req:any,res:any) =>{
         const getUser = await Register.find({email:{$eq:email}})
         if(getUser !== null){
             console.log("database called")
-            // redisClient.set("userInfo",JSON.stringify(getUser), (err:any,reply:any)=>{
-            //     console.log(reply)
-            // })
             return res.success(responseMessage.SUCCESSMSG.DATA_FETCHED,getUser)
         }
         else{
